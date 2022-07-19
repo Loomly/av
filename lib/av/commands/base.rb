@@ -119,7 +119,9 @@ module Av
             meta[:length] = $2.to_s + ":" + $3.to_s + ":" + $4.to_s
             meta[:duration] = $2.to_i * 3600 + $3.to_i * 60 + $4.to_f
           end
-          if line =~ /rotate\s*:\s(\d*)/
+          if line =~ /rotation\sof\s(-?\d*\.?\d+)/
+            meta[:rotate] = $1.to_i
+          elsif line =~ /rotate\s*:\s(\d*)/
             meta[:rotate] = $1.to_i
           end
         end
