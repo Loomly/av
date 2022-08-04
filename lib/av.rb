@@ -24,10 +24,10 @@ module Av
     ::Av::Cli.new(options)
   end
   
-  def run line, codes = [0]
+  def run(line, codes = [0], runner_options = {})
     ::Av.log("Running command: #{line}")
     begin
-      Terrapin::CommandLine.new(line, "", expected_outcodes: codes).run
+      Terrapin::CommandLine.new(line, "", expected_outcodes: codes, runner_options: runner_options).run
     rescue Terrapin::ExitStatusError => e
       raise Av::CommandError, "error while running command #{line}: #{e}"
     end

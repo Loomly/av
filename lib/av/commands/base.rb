@@ -73,7 +73,7 @@ module Av
         @output_params = hash
       end
 
-      def run
+      def run(runner_options = {})
         raise Av::CommandError if (@source.nil? && @destination.nil?) || @command_name.nil?
 
         parameters = []
@@ -88,7 +88,7 @@ module Av
         end
         parameters << %Q(-y "#{@destination}") if @destination
         command_line = parameters.flatten.compact.join(" ").strip.squeeze(" ")
-        ::Av.run(command_line)
+        ::Av.run(command_line, [0], runner_options)
       end
 
       def identify path
